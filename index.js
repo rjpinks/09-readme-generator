@@ -1,9 +1,6 @@
-// TODO: Include packages needed for this application
 const inquirer = require("inquirer")
 const fs = require("fs");
-// TODO: Create an array of questions for user input
 const questions = [
-    //I'm pretty sure that I'll want to cycle through these as I asked questions in my .prompt() for loops would be better than typing each out
     "What's your project's title?",
     "Time to provide a description--What whas your motivation/what did you learn?",
     "Are there any steps for installation?",
@@ -12,16 +9,7 @@ const questions = [
     "Are you using a license?"
 ];
 
-// TODO: Create a function to write README file
-//function writeToFile(fileName, data) {
- //   js.writeFile("README.md", /*this is the value of the README.md*/, /*error stuff goes here*/)
-//}
-
-// TODO: Create a function to initialize app
 function init() {
-  // I'm not sure why but this forEach doesn't work bc it doesn't wait for each prompt
-  // questions.forEach(question => {
-    //anyways this bad boy right here is making an object which we'll make our readme from. need to look up templates next!
     inquirer.prompt([
       {
         type: 'input',
@@ -79,10 +67,6 @@ ${response.collaboraters}
 
 ${response.license}`, (err) => console.log(err))
     });
-  // })
 }
-//I think this is the function that will have the .prompt object that will ask the questions.
-//after the questions are finished then we need to call writeToFile() bc that's going gonna make the finished product.
 
-// Function call to initialize app
 init();

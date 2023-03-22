@@ -1,6 +1,6 @@
 // TODO: Include packages needed for this application
-  const inquirer = require("inquirer")
-//const js = require("js");
+const inquirer = require("inquirer")
+const fs = require("fs");
 // TODO: Create an array of questions for user input
 const questions = [
     //I'm pretty sure that I'll want to cycle through these as I asked questions in my .prompt() for loops would be better than typing each out
@@ -56,6 +56,28 @@ function init() {
     ])
     .then((response) => {
       console.log("response", response);
+      fs.writeFile("userREADME.md", `
+# ${response.title}
+
+## Description
+
+${response.description}
+
+## Installation
+
+${response.installation}
+
+## Usage
+
+${response.instructions}
+
+## Credits
+
+${response.collaboraters}
+
+## License
+
+${response.license}`, (err) => console.log(err))
     });
   // })
 }

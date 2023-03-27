@@ -1,3 +1,3 @@
-# Professional README Generator Starter Code
+Yo, I'm using this as a temporary notes storage.
 
-[How to create a Professional README](https://coding-boot-camp.github.io/full-stack/github/professional-readme-guide)
+What I really need to do is look into badges. I need to look into how the badges work, and mess around with how badges work.

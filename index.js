@@ -1,27 +1,18 @@
-// TODO: Include packages needed for this application
-  const inquirer = require("inquirer")
-//const js = require("js");
-// TODO: Create an array of questions for user input
+const inquirer = require("inquirer")
+const fs = require("fs");
 const questions = [
-    //I'm pretty sure that I'll want to cycle through these as I asked questions in my .prompt() for loops would be better than typing each out
     "What's your project's title?",
     "Time to provide a description--What whas your motivation/what did you learn?",
     "Are there any steps for installation?",
     "Provide me with some instructions/examples for using your app.",
     "Time to give a shoutout to any collaboraters/code that you might've used!",
-    "Are you using a license?"
+    "Provide information on how to run tests on your app please.",
+    "Enter license information?",
+    "What is your email?",
+    "what is your GitHub profile name?"
 ];
 
-// TODO: Create a function to write README file
-//function writeToFile(fileName, data) {
- //   js.writeFile("README.md", /*this is the value of the README.md*/, /*error stuff goes here*/)
-//}
-
-// TODO: Create a function to initialize app
 function init() {
-  // I'm not sure why but this forEach doesn't work bc it doesn't wait for each prompt
-  // questions.forEach(question => {
-    //anyways this bad boy right here is making an object which we'll make our readme from. need to look up templates next!
     inquirer.prompt([
       {
         type: 'input',
@@ -53,14 +44,68 @@ function init() {
         message: questions[5],
         name: "license"
       },
+      {
+        type: "input",
+        message: questions[6],
+        name: "tests"
+      },
+      {
+        type: "input",
+        message: questions[7],
+        name: "email"
+      },
+      {
+        type: "input",
+        message: questions[8],
+        name: "github"
+      }
     ])
     .then((response) => {
       console.log("response", response);
-    });
-  // })
-}
-//I think this is the function that will have the .prompt object that will ask the questions.
-//after the questions are finished then we need to call writeToFile() bc that's going gonna make the finished product.
+      fs.writeFile("userREADME.md", `
+# ${response.title}
 
-// Function call to initialize app
+## Description
+
+${response.description}
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+- [Questions](#questions)
+
+## Installation
+
+${response.installation}
+
+## Usage
+
+${response.instructions}
+
+## Contributing
+
+${response.collaboraters}
+
+## License
+
+${response.license}
+
+## Tests
+
+${response.tests}
+
+## Questions
+
+If you have additional questions please contact me at:
+email-- ${response.email}
+
+GitHub Profile-- https://www.github.com/${response.github}`
+
+, (err) => console.log(err))
+    });
+}
+
 init();

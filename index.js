@@ -7,7 +7,7 @@ const questions = [
     "Provide me with some instructions/examples for using your app.",
     "Time to give a shoutout to any collaboraters/code that you might've used!",
     "Provide information on how to run tests on your app please.",
-    "Enter license information?",
+    "Please select a license: Apache, BSD, or MIT",
     "What is your email?",
     "what is your GitHub profile name?"
 ];
@@ -42,12 +42,12 @@ function init() {
       {
         type: "input",
         message: questions[5],
-        name: "license"
+        name: "tests"
       },
       {
         type: "input",
         message: questions[6],
-        name: "tests"
+        name: "license"
       },
       {
         type: "input",
@@ -61,8 +61,18 @@ function init() {
       }
     ])
     .then((response) => {
-      console.log("response", response);
-      fs.writeFile("userREADME.md", `
+      if (response.license === "MIT" || response.license === "mit") {
+        var badge = "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)";
+      } else if (response.license === "Apache" || response.license === "apache") {
+        var badge = "[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)";
+      } else if (response.license === "BSD" || response.license === "bsd") {
+        var badge = "[![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)";
+      } else {
+        var badge = "Well, we didn't enter a proper response. We're learning how to use throw and error object, but I don't think I have a grasp yet."
+      }
+      fs.writeFile("userREADME.md", 
+`${badge}
+
 # ${response.title}
 
 ## Description
@@ -91,7 +101,7 @@ ${response.collaboraters}
 
 ## License
 
-${response.license}
+This app is using the ${response.license} license.
 
 ## Tests
 
